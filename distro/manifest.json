@@ -1,0 +1,26 @@
+{
+	"manifest_version": 3,
+	"name": "Chrome Extension Test",
+	"description": "Explore chrome extension behavior",
+	"version": "1.0.0",
+	"icons": {
+	},
+	"action": {
+		"default_title": "Open test tab"
+	},
+	"background": {
+		"service_worker": "background.js"
+	},
+	"content_scripts": [
+	],
+	"permissions": [
+		"identity",
+		"cookies",
+		"alarms",
+		"storage",
+		"scripting"
+	],
+	"host_permissions": [
+		"<all_urls>"
+	]
+}
