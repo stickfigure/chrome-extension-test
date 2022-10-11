@@ -4,20 +4,28 @@ import Tab = chrome.tabs.Tab;
 
 let tab: Tab = null;
 
-async function sendBack() {
+async function sendBack(): Promise<void> {
     console.log("starting");
-    await chrome.runtime.sendMessage({foo: 'bar1'});
+    try {
+        await chrome.runtime.sendMessage({foo: 'bar1'});
+    } catch (e) {
+        console.error(e);   // not called
+    }
     console.log("this is never seen");
     await chrome.runtime.sendMessage({foo: 'bar2'});    // never executed
     console.log("definitely never seen");
 }
 
 async function doit() {
-    await executeScript(tab, sendBack);
+    try {
+        await executeScript(tab, sendBack);
+    } catch (e) {
+        console.error(e);   // not called
+    }
 }
 
 async function openit() {
-    tab = await chrome.tabs.create({url: 'http://www.infohazard.org', active: false});
+    tab = await chrome.tabs.create({url: 'https://example.com/', active: false});
     await waitForTabLoad(tab);
 }
 
